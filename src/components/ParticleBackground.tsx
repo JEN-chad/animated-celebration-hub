@@ -62,7 +62,7 @@ const ParticleBackground = () => {
             enable: true,
           },
           move: {
-            directions: 'none',
+            direction: 'none',
             enable: true,
             outModes: {
               default: 'bounce',
