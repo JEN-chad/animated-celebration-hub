@@ -18,11 +18,10 @@ const AnimatedSphere = () => {
     <Sphere ref={meshRef} args={[1, 100, 200]} scale={2.5}>
       <MeshDistortMaterial
         color="#8338ec"
-        attach="material"
         distort={0.5}
         speed={2}
         roughness={0.4}
-        transparent
+        transparent={true}
         opacity={0.8}
       />
     </Sphere>
@@ -32,7 +31,11 @@ const AnimatedSphere = () => {
 const ThreeBackground: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <div className={className}>
-      <Canvas camera={{ position: [0, 0, 5] }}>
+      <Canvas 
+        camera={{ position: [0, 0, 5] }}
+        gl={{ alpha: true, antialias: true }}
+        dpr={[1, 2]}
+      >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
         <AnimatedSphere />
