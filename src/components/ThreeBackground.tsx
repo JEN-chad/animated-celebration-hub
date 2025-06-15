@@ -1,7 +1,6 @@
 
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere } from '@react-three/drei';
 import { Mesh } from 'three';
 
 const AnimatedSphere = () => {
@@ -18,16 +17,16 @@ const AnimatedSphere = () => {
   });
 
   return (
-    <Sphere ref={meshRef} args={[1, 64, 64]}>
+    <mesh ref={meshRef}>
+      <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial
         color="#8338ec"
         roughness={0.4}
         metalness={0.1}
-        transparent
+        transparent={true}
         opacity={0.8}
-        wireframe={false}
       />
-    </Sphere>
+    </mesh>
   );
 };
 
