@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
@@ -85,12 +84,6 @@ const RentalServices = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <motion.div
-                    whileHover={{ scale: 1.2, rotate: 15 }}
-                    className="absolute top-4 right-4 text-4xl"
-                  >
-                    {item.icon}
-                  </motion.div>
                 </div>
                 
                 <CardContent className="p-8">
