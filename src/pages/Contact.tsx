@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import ParticleBackground from '@/components/ParticleBackground';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
@@ -23,10 +24,17 @@ const Contact = () => {
     // You can add form submission logic here
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData({
+      ...formData,
+      eventType: value
     });
   };
 
@@ -155,20 +163,18 @@ const Contact = () => {
                         <label htmlFor="eventType" className="block text-sm font-medium text-gray-300 mb-2">
                           Event Type
                         </label>
-                        <select
-                          id="eventType"
-                          name="eventType"
-                          value={formData.eventType}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-electric-blue transition-colors"
-                        >
-                          <option value="">Select Event Type</option>
-                          <option value="wedding">Wedding</option>
-                          <option value="corporate">Corporate Event</option>
-                          <option value="birthday">Birthday Party</option>
-                          <option value="anniversary">Anniversary</option>
-                          <option value="other">Other</option>
-                        </select>
+                        <Select onValueChange={handleSelectChange} value={formData.eventType}>
+                          <SelectTrigger className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-electric-blue transition-colors">
+                            <SelectValue placeholder="Select Event Type" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white/95 backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-50">
+                            <SelectItem value="wedding" className="text-gray-800 hover:bg-gray-100">Wedding</SelectItem>
+                            <SelectItem value="corporate" className="text-gray-800 hover:bg-gray-100">Corporate Event</SelectItem>
+                            <SelectItem value="birthday" className="text-gray-800 hover:bg-gray-100">Birthday Party</SelectItem>
+                            <SelectItem value="anniversary" className="text-gray-800 hover:bg-gray-100">Anniversary</SelectItem>
+                            <SelectItem value="other" className="text-gray-800 hover:bg-gray-100">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                     </div>
 
