@@ -44,9 +44,17 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
+            className="flex items-center"
           >
-            <Link to="/" className="text-2xl font-bold gradient-text">
-              SM Creations
+            <Link to="/" className="flex items-center space-x-3">
+              <img 
+                src="/lovable-uploads/5cbf6975-e860-464e-9736-ca8236b388f6.png" 
+                alt="SM Creations Logo" 
+                className="h-10 w-auto"
+              />
+              <span className="text-2xl font-bold gradient-text hidden sm:block">
+                SM Creations
+              </span>
             </Link>
           </motion.div>
 
