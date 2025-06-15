@@ -46,7 +46,7 @@ const Navbar = () => {
             transition={{ delay: 0.2 }}
           >
             <Link to="/" className="text-2xl font-bold gradient-text">
-              EventSphere
+              SM Creations
             </Link>
           </motion.div>
 

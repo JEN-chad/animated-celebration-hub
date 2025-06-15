@@ -13,6 +13,7 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Contact', path: '/contact' },
     { name: 'Gallery', path: '/gallery' }
@@ -37,7 +38,7 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             className="col-span-1 md:col-span-1"
           >
-            <h3 className="text-2xl font-bold gradient-text mb-4">EventSphere</h3>
+            <h3 className="text-2xl font-bold gradient-text mb-4">SM Creations</h3>
             <p className="text-gray-300 mb-4">
               Creating unforgettable experiences through innovative event management and stunning celebrations.
             </p>
@@ -103,7 +104,7 @@ const Footer = () => {
           >
             <h4 className="text-lg font-semibold text-white mb-4">Contact Info</h4>
             <div className="space-y-2 text-gray-300">
-              <p>📧 hello@eventsphere.com</p>
+              <p>📧 hello@smcreations.com</p>
               <p>📞 +1 (555) 123-4567</p>
               <p>📍 123 Event Plaza, Creative City, CC 12345</p>
             </div>
@@ -136,7 +137,7 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="border-t border-white/10 mt-8 pt-8 text-center text-gray-400"
         >
-          <p>&copy; 2024 EventSphere. All rights reserved. Creating magical moments, one event at a time.</p>
+          <p>&copy; 2024 SM Creations. All rights reserved. Creating magical moments, one event at a time.</p>
         </motion.div>
       </div>
     </footer>
