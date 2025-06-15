@@ -123,9 +123,10 @@ const EventManager = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="h-full"
     >
-      <Card className="glass-card border-white/20 hover:border-white/40 transition-all duration-300">
-        <div className="relative h-48 overflow-hidden rounded-t-lg">
+      <Card className="glass-card border-white/20 hover:border-white/40 transition-all duration-300 h-full flex flex-col">
+        <div className="relative h-48 overflow-hidden rounded-t-lg flex-shrink-0">
           <img
             src={event.image}
             alt={event.title}
@@ -137,12 +138,12 @@ const EventManager = () => {
             {event.category}
           </Badge>
         </div>
-        <CardContent className="p-4">
-          <h3 className="text-lg font-bold text-white mb-2">{event.title}</h3>
-          <p className="text-gray-300 text-sm mb-3 line-clamp-2">{event.description}</p>
+        <CardContent className="p-4 flex flex-col flex-grow">
+          <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 min-h-[3.5rem]">{event.title}</h3>
+          <p className="text-gray-300 text-sm mb-3 line-clamp-3 flex-grow min-h-[4.5rem]">{event.description}</p>
           <p className="text-electric-blue text-sm mb-4">{event.date}</p>
           
-          <div className="flex gap-2">
+          <div className="flex gap-2 mt-auto">
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm" className="flex-1">
