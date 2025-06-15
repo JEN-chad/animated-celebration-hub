@@ -34,20 +34,20 @@ const Contact = () => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: 'Phone',
-      info: '+1 (555) 123-4567',
+      info: '+91 7947419979',
       detail: 'Mon-Fri 9AM-6PM'
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email',
-      info: 'hello@smcreations.com',
+      info: 'Smcreations2k18@gmail.com',
       detail: 'We reply within 24 hours'
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       title: 'Office',
-      info: '123 Event Plaza, Creative City',
-      detail: 'CC 12345, United States'
+      info: 'No:28, 29, Mck Nagar, Phase 3',
+      detail: 'Maduravoyal, Chennai - 600095 (Near Maduravoyal Bypass Mgr University)'
     },
     {
       icon: <Clock className="w-6 h-6" />,
@@ -148,7 +148,7 @@ const Contact = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-electric-blue transition-colors"
-                          placeholder="+1 (555) 123-4567"
+                          placeholder="+91 7947419979"
                         />
                       </div>
                       <div>

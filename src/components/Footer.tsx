@@ -104,9 +104,11 @@ const Footer = () => {
           >
             <h4 className="text-lg font-semibold text-white mb-4">Contact Info</h4>
             <div className="space-y-2 text-gray-300">
-              <p>📧 hello@smcreations.com</p>
-              <p>📞 +1 (555) 123-4567</p>
-              <p>📍 123 Event Plaza, Creative City, CC 12345</p>
+              <p>📧 Smcreations2k18@gmail.com</p>
+              <p>📞 +91 7947419979</p>
+              <p>📍 No:28, 29, Mck Nagar, Phase 3</p>
+              <p className="text-sm">Maduravoyal, Chennai - 600095</p>
+              <p className="text-sm">(Near Maduravoyal Bypass Mgr University)</p>
             </div>
             
             {/* Newsletter Signup */}
