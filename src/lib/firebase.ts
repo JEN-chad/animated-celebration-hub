@@ -4,15 +4,14 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
-// TODO: Replace these placeholder values with your actual Firebase config
-// Get these values from Firebase Console > Project Settings > General > Your apps
 const firebaseConfig = {
-  apiKey: "your-actual-api-key-here",
-  authDomain: "your-project-id.firebaseapp.com",
-  projectId: "your-actual-project-id",
-  storageBucket: "your-project-id.appspot.com",
-  messagingSenderId: "your-actual-sender-id",
-  appId: "your-actual-app-id"
+  apiKey: "AIzaSyD7Fmhdz_plnnHfnam2YOS6WXsLYNgfJV0",
+  authDomain: "sm-creations-web.firebaseapp.com",
+  projectId: "sm-creations-web",
+  storageBucket: "sm-creations-web.firebasestorage.app",
+  messagingSenderId: "967000114933",
+  appId: "1:967000114933:web:b5e10738b7b4891ed427bc",
+  measurementId: "G-63PC82VWKC"
 };
 
 // Initialize Firebase
