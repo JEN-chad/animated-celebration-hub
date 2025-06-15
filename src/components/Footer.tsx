@@ -109,6 +109,7 @@ const Footer = () => {
               <p>📍 No:28, 29, Mck Nagar, Phase 3</p>
               <p className="text-sm">Maduravoyal, Chennai - 600095</p>
               <p className="text-sm">(Near Maduravoyal Bypass Mgr University)</p>
+              <p className="text-sm mt-2">🕒 24/7 Service (Closed Sundays)</p>
             </div>
             
             {/* Newsletter Signup */}

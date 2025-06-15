@@ -43,7 +43,7 @@ const Contact = () => {
       icon: <Phone className="w-6 h-6" />,
       title: 'Phone',
       info: '+91 7947419979',
-      detail: 'Mon-Fri 9AM-6PM'
+      detail: '24/7 except Sundays'
     },
     {
       icon: <Mail className="w-6 h-6" />,
@@ -60,8 +60,8 @@ const Contact = () => {
     {
       icon: <Clock className="w-6 h-6" />,
       title: 'Business Hours',
-      info: 'Mon-Fri: 9AM-6PM',
-      detail: 'Sat-Sun: By appointment'
+      info: '24/7 Service Available',
+      detail: 'Closed on Sundays'
     }
   ];
 
