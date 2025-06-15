@@ -1,7 +1,7 @@
 
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, MeshDistortMaterial } from '@react-three/drei';
+import { Sphere } from '@react-three/drei';
 import { Mesh } from 'three';
 
 const AnimatedSphere = () => {
@@ -11,18 +11,21 @@ const AnimatedSphere = () => {
     if (meshRef.current) {
       meshRef.current.rotation.x = state.clock.elapsedTime * 0.2;
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.3;
+      // Add some scale animation for visual interest
+      const scale = 2.5 + Math.sin(state.clock.elapsedTime) * 0.1;
+      meshRef.current.scale.setScalar(scale);
     }
   });
 
   return (
-    <Sphere ref={meshRef} args={[1, 100, 200]} scale={2.5}>
-      <MeshDistortMaterial
+    <Sphere ref={meshRef} args={[1, 64, 64]}>
+      <meshStandardMaterial
         color="#8338ec"
-        distort={0.5}
-        speed={2}
         roughness={0.4}
-        transparent={true}
+        metalness={0.1}
+        transparent
         opacity={0.8}
+        wireframe={false}
       />
     </Sphere>
   );
