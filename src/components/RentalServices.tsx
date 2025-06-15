@@ -11,25 +11,29 @@ const RentalServices = () => {
       title: 'Video Wall On Hire',
       description: 'We also best in providing all the types of LED video wall on rental purpose to the customer with less affordable service rate.',
       icon: '📺',
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-blue-500 to-cyan-500',
+      image: '/lovable-uploads/5cbf6975-e860-464e-9736-ca8236b388f6.png'
     },
     {
       title: 'Outdoor LED Screen On Rent',
       description: 'We are best in offering outdoor LED Screen On rental purpose to the customer with less affordable service rate.',
       icon: '🖥️',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-green-500 to-emerald-500',
+      image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=200&fit=crop'
     },
     {
       title: 'LED Screen On Rent (High-Quality Display)',
       description: 'We also best in supplying LED Screen for rental purpose to the customer with less affordable service rate.',
       icon: '💻',
-      color: 'from-purple-500 to-violet-500'
+      color: 'from-purple-500 to-violet-500',
+      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=200&fit=crop'
     },
     {
       title: 'LED Wall On Rent – Immersive Visual Experience',
       description: 'We also best in providing LED walls for rental purpose to the customer with less affordable service rate with best in providing quality of service.',
       icon: '🎬',
-      color: 'from-pink-500 to-rose-500'
+      color: 'from-pink-500 to-rose-500',
+      image: 'https://images.unsplash.com/photo-1487887235947-a955ef187fcc?w=400&h=200&fit=crop'
     }
   ];
 
@@ -73,15 +77,23 @@ const RentalServices = () => {
               className="group"
               style={{ perspective: '1000px' }}
             >
-              <Card className="glass-card border-white/20 hover:border-white/40 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-electric-purple/20 h-full">
-                <CardContent className="p-8">
+              <Card className="glass-card border-white/20 hover:border-white/40 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-electric-purple/20 h-full overflow-hidden">
+                <div className="relative h-48 w-full overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <motion.div
                     whileHover={{ scale: 1.2, rotate: 15 }}
-                    className="text-5xl mb-6 inline-block"
+                    className="absolute top-4 right-4 text-4xl"
                   >
                     {item.icon}
                   </motion.div>
-                  
+                </div>
+                
+                <CardContent className="p-8">
                   <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-electric-blue transition-colors">
                     {item.title}
                   </h3>
@@ -94,7 +106,7 @@ const RentalServices = () => {
                     className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${item.color} mb-6 transition-all duration-500`}
                   />
                   
-                  <div className="flex gap-3 justify-center">
+                  <div className="flex gap-4 justify-center">
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
