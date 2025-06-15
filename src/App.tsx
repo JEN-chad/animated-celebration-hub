@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Services from "./pages/Services";
+import Gallery from "./pages/Gallery";
+import EventManager from "./pages/EventManager";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,7 +29,8 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/services" element={<Services />} />
-              {/* Additional routes will be added in next iteration */}
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/event-manager" element={<EventManager />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
