@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
@@ -39,11 +38,19 @@ const EventManager = () => {
     date: ''
   });
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 
   if (!isAdmin) {
     return <Navigate to="/login" replace />;
   }
+
+  // Group events by category
+  const eventsByCategory = events.reduce((acc, event) => {
+    if (!acc[event.category]) {
+      acc[event.category] = [];
+    }
+    acc[event.category].push(event);
+    return acc;
+  }, {} as Record<string, Event[]>);
 
   const handleAddEvent = () => {
     if (!newEvent.title || !newEvent.description || !newEvent.category || !newEvent.date) {
@@ -66,7 +73,6 @@ const EventManager = () => {
 
     addEvent(event);
     setNewEvent({ title: '', description: '', image: '', category: '', date: '' });
-    setIsAddDialogOpen(false);
     
     toast({
       title: "Success!",
@@ -103,6 +109,120 @@ const EventManager = () => {
       default: return 'bg-gray-500';
     }
   };
+
+  const categoryInfo = {
+    wedding: { title: 'Wedding Events', icon: '💍', color: 'from-pink-500 to-rose-500' },
+    corporate: { title: 'Corporate Events', icon: '🏢', color: 'from-blue-500 to-indigo-500' },
+    birthday: { title: 'Birthday Events', icon: '🎂', color: 'from-yellow-500 to-orange-500' },
+    custom: { title: 'Custom Events', icon: '🎉', color: 'from-purple-500 to-violet-500' }
+  };
+
+  const renderEventCard = (event: Event, index: number) => (
+    <motion.div
+      key={event.id}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <Card className="glass-card border-white/20 hover:border-white/40 transition-all duration-300">
+        <div className="relative h-48 overflow-hidden rounded-t-lg">
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-full object-cover"
+          />
+          <Badge 
+            className={`absolute top-2 right-2 ${getCategoryColor(event.category)} text-white`}
+          >
+            {event.category}
+          </Badge>
+        </div>
+        <CardContent className="p-4">
+          <h3 className="text-lg font-bold text-white mb-2">{event.title}</h3>
+          <p className="text-gray-300 text-sm mb-3 line-clamp-2">{event.description}</p>
+          <p className="text-electric-blue text-sm mb-4">{event.date}</p>
+          
+          <div className="flex gap-2">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm" className="flex-1">
+                  <Eye className="w-4 h-4 mr-1" />
+                  View
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="glass-card border-white/20">
+                <DialogHeader>
+                  <DialogTitle className="gradient-text">{event.title}</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <img src={event.image} alt={event.title} className="w-full h-48 object-cover rounded" />
+                  <Badge className={`${getCategoryColor(event.category)} text-white`}>
+                    {event.category}
+                  </Badge>
+                  <p className="text-electric-blue">{event.date}</p>
+                  <p className="text-gray-300">{event.description}</p>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setEditingEvent(event)}
+                >
+                  <Edit className="w-4 h-4" />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="glass-card border-white/20">
+                <DialogHeader>
+                  <DialogTitle className="gradient-text">Edit Event</DialogTitle>
+                </DialogHeader>
+                {editingEvent && (
+                  <div className="space-y-4">
+                    <Input
+                      value={editingEvent.title}
+                      onChange={(e) => setEditingEvent({ ...editingEvent, title: e.target.value })}
+                      placeholder="Event title"
+                      className="bg-white/10 border-white/20 text-white"
+                    />
+                    <Input
+                      value={editingEvent.date}
+                      onChange={(e) => setEditingEvent({ ...editingEvent, date: e.target.value })}
+                      placeholder="Event date"
+                      className="bg-white/10 border-white/20 text-white"
+                    />
+                    <Textarea
+                      value={editingEvent.description}
+                      onChange={(e) => setEditingEvent({ ...editingEvent, description: e.target.value })}
+                      placeholder="Event description"
+                      rows={3}
+                      className="bg-white/10 border-white/20 text-white"
+                    />
+                    <Button
+                      onClick={handleUpdateEvent}
+                      className="w-full bg-gradient-to-r from-electric-purple to-electric-blue"
+                    >
+                      Update Event
+                    </Button>
+                  </div>
+                )}
+              </DialogContent>
+            </Dialog>
+
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => handleDeleteEvent(event.id)}
+            >
+              <Trash2 className="w-4 h-4" />
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
 
   return (
     <div className="min-h-screen pt-20 pb-10 px-4 relative">
@@ -213,113 +333,45 @@ const EventManager = () => {
           </TabsContent>
 
           <TabsContent value="manage" className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {events.map((event, index) => (
-                <motion.div
-                  key={event.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Card className="glass-card border-white/20 hover:border-white/40 transition-all duration-300">
-                    <div className="relative h-48 overflow-hidden rounded-t-lg">
-                      <img
-                        src={event.image}
-                        alt={event.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <Badge 
-                        className={`absolute top-2 right-2 ${getCategoryColor(event.category)} text-white`}
-                      >
-                        {event.category}
-                      </Badge>
-                    </div>
-                    <CardContent className="p-4">
-                      <h3 className="text-lg font-bold text-white mb-2">{event.title}</h3>
-                      <p className="text-gray-300 text-sm mb-3 line-clamp-2">{event.description}</p>
-                      <p className="text-electric-blue text-sm mb-4">{event.date}</p>
-                      
-                      <div className="flex gap-2">
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button variant="outline" size="sm" className="flex-1">
-                              <Eye className="w-4 h-4 mr-1" />
-                              View
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="glass-card border-white/20">
-                            <DialogHeader>
-                              <DialogTitle className="gradient-text">{event.title}</DialogTitle>
-                            </DialogHeader>
-                            <div className="space-y-4">
-                              <img src={event.image} alt={event.title} className="w-full h-48 object-cover rounded" />
-                              <Badge className={`${getCategoryColor(event.category)} text-white`}>
-                                {event.category}
-                              </Badge>
-                              <p className="text-electric-blue">{event.date}</p>
-                              <p className="text-gray-300">{event.description}</p>
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button 
-                              variant="outline" 
-                              size="sm"
-                              onClick={() => setEditingEvent(event)}
-                            >
-                              <Edit className="w-4 h-4" />
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="glass-card border-white/20">
-                            <DialogHeader>
-                              <DialogTitle className="gradient-text">Edit Event</DialogTitle>
-                            </DialogHeader>
-                            {editingEvent && (
-                              <div className="space-y-4">
-                                <Input
-                                  value={editingEvent.title}
-                                  onChange={(e) => setEditingEvent({ ...editingEvent, title: e.target.value })}
-                                  placeholder="Event title"
-                                  className="bg-white/10 border-white/20 text-white"
-                                />
-                                <Input
-                                  value={editingEvent.date}
-                                  onChange={(e) => setEditingEvent({ ...editingEvent, date: e.target.value })}
-                                  placeholder="Event date"
-                                  className="bg-white/10 border-white/20 text-white"
-                                />
-                                <Textarea
-                                  value={editingEvent.description}
-                                  onChange={(e) => setEditingEvent({ ...editingEvent, description: e.target.value })}
-                                  placeholder="Event description"
-                                  rows={3}
-                                  className="bg-white/10 border-white/20 text-white"
-                                />
-                                <Button
-                                  onClick={handleUpdateEvent}
-                                  className="w-full bg-gradient-to-r from-electric-purple to-electric-blue"
-                                >
-                                  Update Event
-                                </Button>
-                              </div>
-                            )}
-                          </DialogContent>
-                        </Dialog>
-
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => handleDeleteEvent(event.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+            <div className="space-y-12">
+              {Object.entries(categoryInfo).map(([category, info]) => {
+                const categoryEvents = eventsByCategory[category] || [];
+                
+                return (
+                  <motion.div
+                    key={category}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="space-y-6"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`p-3 rounded-full bg-gradient-to-r ${info.color}`}>
+                        <span className="text-2xl">{info.icon}</span>
                       </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+                      <div>
+                        <h2 className="text-2xl font-bold text-white">{info.title}</h2>
+                        <p className="text-gray-400">
+                          {categoryEvents.length} event{categoryEvents.length !== 1 ? 's' : ''}
+                        </p>
+                      </div>
+                    </div>
+
+                    {categoryEvents.length > 0 ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {categoryEvents.map((event, index) => renderEventCard(event, index))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-8 glass-card border-white/10 rounded-lg">
+                        <p className="text-gray-400">No {category} events found.</p>
+                        <p className="text-gray-500 text-sm mt-2">
+                          Add your first {category} event using the "Add New Event" tab.
+                        </p>
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
 
             {events.length === 0 && (
