@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import { EventsProvider } from "./contexts/EventsContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -22,24 +23,26 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <div className="min-h-screen bg-background text-foreground">
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/event-manager" element={<EventManager />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Footer />
-          </div>
-        </BrowserRouter>
+        <EventsProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <div className="min-h-screen bg-background text-foreground">
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/event-manager" element={<EventManager />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Footer />
+            </div>
+          </BrowserRouter>
+        </EventsProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>

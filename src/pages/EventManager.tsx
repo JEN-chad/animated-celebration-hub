@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
+import { useEvents } from '@/contexts/EventsContext';
 import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -27,25 +28,8 @@ interface Event {
 
 const EventManager = () => {
   const { isAdmin } = useAuth();
+  const { events, addEvent, updateEvent, deleteEvent } = useEvents();
   const { toast } = useToast();
-  const [events, setEvents] = useState<Event[]>([
-    {
-      id: '1',
-      title: 'Sarah & Michael\'s Wedding',
-      description: 'A magical outdoor wedding ceremony with 200 guests.',
-      image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      category: 'wedding',
-      date: 'December 15, 2024'
-    },
-    {
-      id: '2',
-      title: 'TechCorp Annual Gala',
-      description: 'A sophisticated corporate event celebrating the company\'s 25th anniversary.',
-      image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
-      category: 'corporate',
-      date: 'November 20, 2024'
-    }
-  ]);
 
   const [newEvent, setNewEvent] = useState({
     title: '',
@@ -75,23 +59,23 @@ const EventManager = () => {
       id: Date.now().toString(),
       title: newEvent.title,
       description: newEvent.description,
-      image: newEvent.image || '/placeholder.svg',
+      image: newEvent.image || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       category: newEvent.category as Event['category'],
       date: newEvent.date
     };
 
-    setEvents([...events, event]);
+    addEvent(event);
     setNewEvent({ title: '', description: '', image: '', category: '', date: '' });
     setIsAddDialogOpen(false);
     
     toast({
       title: "Success!",
-      description: "Event added successfully.",
+      description: "Event added successfully and will appear in the gallery.",
     });
   };
 
   const handleDeleteEvent = (id: string) => {
-    setEvents(events.filter(event => event.id !== id));
+    deleteEvent(id);
     toast({
       title: "Success!",
       description: "Event deleted successfully.",
@@ -101,9 +85,7 @@ const EventManager = () => {
   const handleUpdateEvent = () => {
     if (!editingEvent) return;
 
-    setEvents(events.map(event => 
-      event.id === editingEvent.id ? editingEvent : event
-    ));
+    updateEvent(editingEvent);
     setEditingEvent(null);
     
     toast({
@@ -137,7 +119,7 @@ const EventManager = () => {
             Event Manager
           </h1>
           <p className="text-xl text-gray-300">
-            Manage your event portfolio
+            Manage your event portfolio - Events added here will appear in the gallery
           </p>
         </motion.div>
 
@@ -224,7 +206,7 @@ const EventManager = () => {
                   className="w-full bg-gradient-to-r from-electric-purple to-electric-blue hover:from-electric-blue hover:to-electric-purple"
                 >
                   <Plus className="w-4 h-4 mr-2" />
-                  Add Event
+                  Add Event to Gallery
                 </Button>
               </CardContent>
             </Card>
