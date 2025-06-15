@@ -116,11 +116,11 @@ const RentalServices = () => {
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-full"
+                      className="flex justify-center"
                     >
                       <Button
                         onClick={handleEnquire}
-                        className="w-full bg-gradient-to-r from-electric-purple to-electric-blue hover:from-electric-blue hover:to-electric-purple text-white font-semibold py-3 rounded-lg shadow-xl hover:shadow-electric-purple/50 transition-all duration-300"
+                        className="bg-gradient-to-r from-electric-purple to-electric-blue hover:from-electric-blue hover:to-electric-purple text-white font-semibold py-3 px-6 rounded-lg shadow-xl hover:shadow-electric-purple/50 transition-all duration-300"
                       >
                         Enquire Now ✨
                       </Button>
