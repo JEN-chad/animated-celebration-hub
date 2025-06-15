@@ -38,19 +38,19 @@ const Home = () => {
   const recentEvents = [
     {
       title: 'Sarah & Michael\'s Wedding',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
       type: 'Wedding',
       date: 'December 2024'
     },
     {
       title: 'TechCorp Annual Gala',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
       type: 'Corporate',
       date: 'November 2024'
     },
     {
       title: 'Emma\'s Sweet 16',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
       type: 'Birthday',
       date: 'October 2024'
     }
