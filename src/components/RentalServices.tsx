@@ -1,23 +1,11 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Phone, MessageCircle } from 'lucide-react';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
 
 const RentalServices = () => {
-  const [showContactDialog, setShowContactDialog] = useState(false);
-
   const rentalItems = [
     {
       title: 'Video Wall On Hire',
@@ -47,149 +35,139 @@ const RentalServices = () => {
 
   const handleCall = () => {
     window.open('tel:+917947419979', '_self');
-    setShowContactDialog(false);
   };
 
   const handleWhatsApp = () => {
     window.open('https://wa.me/917947419979', '_blank');
-    setShowContactDialog(false);
-  };
-
-  const handleEnquire = () => {
-    setShowContactDialog(true);
   };
 
   return (
-    <>
-      <section className="py-20 px-4 relative">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-              Event Equipment & LED Rentals
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Affordable & High-Quality Visual Display Solutions from SM Creations
-            </p>
-          </motion.div>
+    <section className="py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+            Event Equipment & LED Rentals
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Affordable & High-Quality Visual Display Solutions from SM Creations
+          </p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {rentalItems.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ 
-                  scale: 1.03,
-                  rotateY: 5,
-                  rotateX: 2
-                }}
-                className="group"
-                style={{ perspective: '1000px' }}
-              >
-                <Card className="glass-card border-white/20 hover:border-white/40 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-electric-purple/20 h-full">
-                  <CardContent className="p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {rentalItems.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              whileHover={{ 
+                scale: 1.03,
+                rotateY: 5,
+                rotateX: 2
+              }}
+              className="group"
+              style={{ perspective: '1000px' }}
+            >
+              <Card className="glass-card border-white/20 hover:border-white/40 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-electric-purple/20 h-full">
+                <CardContent className="p-8">
+                  <motion.div
+                    whileHover={{ scale: 1.2, rotate: 15 }}
+                    className="text-5xl mb-6 inline-block"
+                  >
+                    {item.icon}
+                  </motion.div>
+                  
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-electric-blue transition-colors">
+                    {item.title}
+                  </h3>
+                  
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    {item.description}
+                  </p>
+                  
+                  <motion.div
+                    className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${item.color} mb-6 transition-all duration-500`}
+                  />
+                  
+                  <div className="flex gap-3 justify-center">
                     <motion.div
-                      whileHover={{ scale: 1.2, rotate: 15 }}
-                      className="text-5xl mb-6 inline-block"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      {item.icon}
+                      <Button
+                        onClick={handleCall}
+                        className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-xl hover:shadow-blue-500/50 transition-all duration-300 flex items-center gap-2"
+                      >
+                        <Phone className="w-4 h-4" />
+                        Call Now
+                      </Button>
                     </motion.div>
-                    
-                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-electric-blue transition-colors">
-                      {item.title}
-                    </h3>
-                    
-                    <p className="text-gray-300 mb-6 leading-relaxed">
-                      {item.description}
-                    </p>
-                    
-                    <motion.div
-                      className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${item.color} mb-6 transition-all duration-500`}
-                    />
                     
                     <motion.div
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex justify-center"
                     >
                       <Button
-                        onClick={handleEnquire}
-                        className="bg-gradient-to-r from-electric-purple to-electric-blue hover:from-electric-blue hover:to-electric-purple text-white font-semibold py-3 px-6 rounded-lg shadow-xl hover:shadow-electric-purple/50 transition-all duration-300"
+                        onClick={handleWhatsApp}
+                        className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-lg shadow-xl hover:shadow-green-500/50 transition-all duration-300 flex items-center gap-2"
                       >
-                        Enquire Now ✨
+                        <MessageCircle className="w-4 h-4" />
+                        WhatsApp
                       </Button>
                     </motion.div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
 
-          {/* Additional CTA Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-center mt-16"
-          >
-            <div className="glass-card p-8 rounded-2xl max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold gradient-text mb-4">
-                Need Custom Equipment Solutions?
-              </h3>
-              <p className="text-gray-300 mb-6">
-                We provide customized rental packages for your specific event requirements. 
-                Contact us for personalized quotes and equipment combinations.
-              </p>
+        {/* Additional CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="text-center mt-16"
+        >
+          <div className="glass-card p-8 rounded-2xl max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold gradient-text mb-4">
+              Need Custom Equipment Solutions?
+            </h3>
+            <p className="text-gray-300 mb-6">
+              We provide customized rental packages for your specific event requirements. 
+              Contact us for personalized quotes and equipment combinations.
+            </p>
+            <div className="flex gap-4 justify-center">
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
-                  onClick={handleEnquire}
+                  onClick={handleCall}
                   size="lg"
-                  className="bg-gradient-to-r from-electric-orange to-electric-pink hover:from-electric-pink hover:to-electric-orange text-white px-8 py-3 text-lg font-semibold rounded-full shadow-xl hover:shadow-electric-orange/50 transition-all duration-300"
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 text-lg font-semibold rounded-full shadow-xl hover:shadow-blue-500/50 transition-all duration-300 flex items-center gap-2"
                 >
-                  Get Custom Quote 💫
+                  <Phone className="w-5 h-5" />
+                  Call Now
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button
+                  onClick={handleWhatsApp}
+                  size="lg"
+                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-3 text-lg font-semibold rounded-full shadow-xl hover:shadow-green-500/50 transition-all duration-300 flex items-center gap-2"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  WhatsApp
                 </Button>
               </motion.div>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <AlertDialog open={showContactDialog} onOpenChange={setShowContactDialog}>
-        <AlertDialogContent className="glass-card border-white/20">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-white text-xl">Choose Contact Method</AlertDialogTitle>
-            <AlertDialogDescription className="text-gray-300">
-              How would you like to get in touch with us for your rental enquiry?
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter className="flex flex-col sm:flex-row gap-3">
-            <AlertDialogAction
-              onClick={handleCall}
-              className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white flex items-center gap-2"
-            >
-              <Phone className="w-4 h-4" />
-              Call Now
-            </AlertDialogAction>
-            <AlertDialogAction
-              onClick={handleWhatsApp}
-              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white flex items-center gap-2"
-            >
-              <MessageCircle className="w-4 h-4" />
-              WhatsApp
-            </AlertDialogAction>
-            <AlertDialogCancel className="border-white/20 text-white hover:bg-white/10">
-              Cancel
-            </AlertDialogCancel>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
