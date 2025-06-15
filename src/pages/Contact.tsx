@@ -66,7 +66,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden pt-16">
+    <div id="contact" className="min-h-screen relative overflow-hidden pt-16">
       <ParticleBackground />
       
       {/* Hero Section */}

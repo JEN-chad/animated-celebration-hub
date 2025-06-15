@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import ParticleBackground from '@/components/ParticleBackground';
 import ThreeBackground from '@/components/ThreeBackground';
+import RentalServices from '@/components/RentalServices';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -163,6 +163,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Event Equipment & LED Rentals Section */}
+      <RentalServices />
 
       {/* Recent Events */}
       <section className="py-20 px-4 relative">
